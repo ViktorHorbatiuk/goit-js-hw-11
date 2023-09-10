@@ -7,7 +7,7 @@ import { createMarkup } from './js/create-markup';
 const links = {
   formLink: document.querySelector('#search-form'),
   galleryLink: document.querySelector('.gallery'),
-  loadLink: document.querySelector('.js-load-btn'),
+  loadLink: document.querySelector('.btn-load--invisible'),
 };
 
 links.formLink.addEventListener('submit', onSubmit);
@@ -37,7 +37,7 @@ async function onSubmit(e) {
     const markup = hits.map(item => createMarkup(item)).join('');
     links.galleryLink.innerHTML = markup;
     if (totalHits > 40) {
-      links.loadLink.classList.remove('js-load-btn');
+      links.loadLink.classList.remove('btn-load--invisible');
       page += 1;
     }
     lightbox.refresh();
@@ -55,7 +55,7 @@ async function onLoadClick() {
   lightbox.refresh();
   const amountOfPages = totalHits / 40 - page;
   if (amountOfPages < 1) {
-    links.loadLink.classList.add('js-load-btn');
+    links.loadLink.classList.add('btn-load--invisible');
     Notify.info("We're sorry, but you've reached the end of search results.");
   }
 }
